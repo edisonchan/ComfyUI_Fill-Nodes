@@ -5,8 +5,9 @@ import os
 import platform
 import psutil
 import importlib
-import json
+import pkg_resources
 import cpuinfo
+import json
 from server import PromptServer
 from aiohttp import web
 
@@ -49,12 +50,15 @@ def gather_system_info():
         "GPU": get_gpu_info(),
         "PyTorch": check_library_version('torch'),
         "torchvision": check_library_version('torchvision'),
+        "torchaudio": check_library_version('torchaudio'),
         "xformers": check_library_version('xformers'),
+        "sageattention": pkg_resources.get_distribution("sageattention").version  or "Unable to determine",
         "numpy": check_library_version('numpy'),
         "Pillow": check_library_version('pillow'),
         "OpenCV": check_library_version('cv2'),
         "transformers": check_library_version('transformers'),
         "diffusers": check_library_version('diffusers'),
+        "Triton": check_library_version('triton'),
     }
 
     try:
