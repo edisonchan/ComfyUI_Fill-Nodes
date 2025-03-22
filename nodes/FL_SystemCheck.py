@@ -39,12 +39,30 @@ def gather_system_info() -> Dict[str, Any]:
         try:
             import torch
             if torch.cuda.is_available():
-                return f"CUDA Device: {torch.cuda.get_device_name(0)} (Driver {torch.version.cuda})"
-            return "CUDA not available"
-        except ImportError:
-            return "PyTorch not installed"
+                # NVIDIA GPU 信息
+                gpu_name = torch.cuda.get_device_name(0)
+                vram = torch.cuda.get_device_properties(0).total_memory / (1024 ** 3)
+                sm_version = torch.cuda.get_device_properties(0).major, torch.cuda.get_device_properties(0).minor
+                return f"{gpu_name} {vram:.0f} GB (SM {sm_version[0]}{sm_version[1]})"
+            else:
+                try:
+                    import pyopencl as cl
+                    platforms = cl.get_platforms()
+                    for platform in platforms:
+                        devices = platform.get_devices()
+                        for device in devices:
+                            if device.type == cl.device_type.GPU:
+                                gpu_name = device.name
+                                vram = device.global_mem_size / (1024 ** 3)
+                                # 获取 AMD 显卡的架构版本
+                                amd_arch = device.get_info(cl.device_info.NAME)  # 通常包含类似 gfx1201 的信息
+                                return f"{gpu_name} {vram:.0f} GB (Arch {amd_arch})"
+                    return "No GPU found (AMD or NVIDIA)"
+                except ImportError:
+                    return "PyTorch not installed, and pyopencl not installed for AMD GPU detection"
         except Exception as e:
             return f"GPU detection error: {str(e)}"
+
 
     def get_library_version(library: str, pkg_name: str = None) -> str:
         pkg = pkg_name or library
@@ -71,7 +89,7 @@ def gather_system_info() -> Dict[str, Any]:
     # --------------------------
     info = {
         "Python version": sys.version.split()[0],
-        "Operating System": f"{platform.system()} {platform.release()} ({platform.version()})",
+        "Operating System": f"{platform.system()} {platform.release()}",
         "CPU": safe_get_cpu_info(),
         "RAM": f"{psutil.virtual_memory().total / (1024 ** 3):.2f} GB",
         "GPU": get_gpu_info(),
