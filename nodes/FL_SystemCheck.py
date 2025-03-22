@@ -6,6 +6,7 @@ import platform
 import psutil
 import importlib
 import json
+import cpuinfo
 from server import PromptServer
 from aiohttp import web
 
@@ -43,7 +44,7 @@ def gather_system_info():
     info = {
         "Python version": sys.version.split()[0],
         "Operating System": f"{platform.system()} {platform.release()}",
-        "CPU": platform.processor() or "Unable to determine",
+        "CPU": cpuinfo.get_cpu_info()['brand_raw'] or "Unable to determine",
         "RAM": f"{psutil.virtual_memory().total / (1024 ** 3):.2f} GB",
         "GPU": get_gpu_info(),
         "PyTorch": check_library_version('torch'),
