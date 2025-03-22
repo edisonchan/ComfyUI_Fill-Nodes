@@ -195,40 +195,55 @@ function lightenColor(color, percent) {
 
 function getIconForKey(key) {
     const iconMap = {
-        "Operating System": "🖥️",
-        "CPU": "⚙️",
-        "RAM": "🧠",
-        "GPU": "🎮",
-        "CUDA version": "🚀",
-        "Python version": "🐍",
-        "PyTorch": "🔥",
-        "xformers": "⚡",
-        "torchvision": "👁️",
-        "numpy": "🔢",
-        "Pillow": "🖼️",
-        "OpenCV": "📷",
-        "transformers": "🤖",
-        "diffusers": "🌈"
+        "Operating System": "🖥️",    // 操作系统
+        "CPU": "⚙️",                  // 处理器
+        "RAM": "🧠",                  // 内存
+        "GPU": "🎮",                  // 显卡
+        "CUDA version": "🚀",         // CUDA 版本
+        "Python version": "🐍",       // Python 版本
+        "PyTorch": "🔥",              // PyTorch
+        "xformers": "⚡",             // xformers 加速库
+        "torchvision": "👁️",         // 计算机视觉库
+        "torchaudio": "🎵",           // 音频库
+        "numpy": "🔢",                // 数值计算库
+        "Pillow": "🖼️",               // 图像处理库
+        "OpenCV": "📷",               // 计算机视觉库
+        "transformers": "🤖",         // NLP 和深度学习
+        "diffusers": "🌈",            // 图像扩散模型
+        "Triton": "🏎️",              // 高性能计算
+        "sageattention": "🍃",       // 注意力机制
+        "AMD Arch": "🌀",             // AMD 架构
+        "Env: PYTHONPATH": "🔗",      // 环境变量 PYTHONPATH
+        "Env: CUDA_HOME": "🏠",       // 环境变量 CUDA_HOME
+        "Env: LD_LIBRARY_PATH": "📂" // 环境变量 LD_LIBRARY_PATH
     };
-    return iconMap[key] || "ℹ️";
+    return iconMap[key] || "ℹ️";       // 默认图标
 }
+
 
 function getColorForKey(key) {
     const colorMap = {
-        "Operating System": "#4a90e2",
-        "CPU": "#50c878",
-        "RAM": "#9b59b6",
-        "GPU": "#e74c3c",
-        "CUDA version": "#f39c12",
-        "Python version": "#3498db",
-        "PyTorch": "#e67e22",
-        "xformers": "#1abc9c",
-        "torchvision": "#34495e",
-        "numpy": "#2ecc71",
-        "Pillow": "#e84393",
-        "OpenCV": "#c5a01c",
-        "transformers": "#6c5ce7",
-        "diffusers": "#00cec9"
+        "Operating System": "#4a90e2", // 蓝色
+        "CPU": "#50c878",             // 绿色
+        "RAM": "#9b59b6",             // 紫色
+        "GPU": "#e74c3c",             // 红色
+        "CUDA version": "#f39c12",    // 橙色
+        "Python version": "#3498db",  // 浅蓝
+        "PyTorch": "#e67e22",         // 深橙
+        "xformers": "#1abc9c",        // 绿松石色
+        "torchvision": "#34495e",     // 深灰蓝
+        "torchaudio": "#8e44ad",      // 紫罗兰
+        "numpy": "#2ecc71",           // 亮绿
+        "Pillow": "#e84393",          // 粉红色
+        "OpenCV": "#c5a01c",          // 金黄色
+        "transformers": "#6c5ce7",    // 蓝紫色
+        "diffusers": "#00cec9",       // 青蓝色
+        "Triton": "#e1b12c",          // 金棕色
+        "sageattention": "#1e272e",   // 深灰色
+        "AMD Arch": "#d63031",        // 暗红色
+        "Env: PYTHONPATH": "#d35400", // 橘黄色
+        "Env: CUDA_HOME": "#27ae60",  // 森林绿
+        "Env: LD_LIBRARY_PATH": "#2980b9" // 海洋蓝
     };
-    return colorMap[key] || "#95a5a6";
+    return colorMap[key] || "#95a5a6"; // 默认灰色
 }
