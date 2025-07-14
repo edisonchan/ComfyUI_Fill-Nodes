@@ -104,6 +104,7 @@ def gather_system_info() -> Dict[str, Any]:
         "numpy": get_library_version('numpy'),
         "transformers": get_library_version('transformers'),
         "diffusers": get_library_version('diffusers'),
+        "peft": get_library_version('peft'),
         **{f"Env: {var}": get_env_var(var) for var in ['PYTHONPATH', 'CUDA_HOME', 'LD_LIBRARY_PATH']}
     }
     return info
