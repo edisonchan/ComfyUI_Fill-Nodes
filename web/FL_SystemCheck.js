@@ -238,6 +238,7 @@ function getColorForKey(key) {
         "OpenCV": "#c5a01c",          // 金黄色
         "transformers": "#6c5ce7",    // 蓝紫色
         "diffusers": "#00cec9",       // 青蓝色
+        "peft": "#00cec9",            // 青蓝色
         "Triton": "#e1b12c",          // 金棕色
         "sageattention": "#1e272e",   // 深灰色
         "AMD Arch": "#d63031",        // 暗红色
